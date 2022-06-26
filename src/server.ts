@@ -6,6 +6,7 @@ import connectMongoose from './config/mongo'
 import SwaggerUI from 'swagger-ui-express'
 import YAML from 'yamljs'
 import authRoutes from './routes/auth'
+import bandMemberRoutes from './routes/band-members'
 
 
 const server = express();
@@ -19,6 +20,7 @@ server.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument))
 // server.use('/api-docs', swaggerMiddleware)
 
 server.use(authRoutes)
+server.use(bandMemberRoutes)
 
 const PORT = 3000;
 
