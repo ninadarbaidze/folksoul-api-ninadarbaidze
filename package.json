@@ -6,7 +6,8 @@
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc -p .",
-    "user:create": "nodemon ./src/bin/create-user.ts"
+    "user:create": "nodemon ./src/bin/create-user.ts",
+    "band:create": "nodemon ./src/bin/create-band.ts"
   },
   "keywords": [],
   "author": "",

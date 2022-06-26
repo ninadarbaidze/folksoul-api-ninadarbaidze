@@ -7,6 +7,7 @@ import SwaggerUI from 'swagger-ui-express'
 import YAML from 'yamljs'
 import authRoutes from './routes/auth'
 import bandMemberRoutes from './routes/band-members'
+import bandRoutes from './routes/band'
 
 
 const server = express();
@@ -21,6 +22,7 @@ server.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument))
 
 server.use(authRoutes)
 server.use(bandMemberRoutes)
+server.use(bandRoutes)
 
 const PORT = 3000;
 
