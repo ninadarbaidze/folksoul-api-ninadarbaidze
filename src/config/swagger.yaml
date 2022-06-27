@@ -10,12 +10,41 @@ servers:
   - url: http://producation.app/api
     description: production server
 
+
 paths:
-  /users:
+  /auth:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+              example:
+                username: nina
+                password: nina
+      responses:
+        '201':
+          description: Created
+
+  /band-members:
     get:
+      tags:
+        - Band Members
+      security:
+        - bearerAuth: []  
       responses:
         '200': 
-          description: Returns a list of users.
+          description: Returns a list of band members.
           content:
             application/json:
               schema: 
@@ -23,13 +52,176 @@ paths:
                 items: 
                   type: object
                   properties:
-                    firstName: 
+                    id: 
                       type: string
-                    lastName: 
+                    name: 
                       type: string
-                    email:
+                    instrument: 
+                      type: string
+                    orbitLength: 
+                      type: number
+                    color: 
+                      type: string
+                    biography: 
                       type: string
                   example:
-                    firstName: gela
-                    lastName: iashvili
-                    email: gela@redberry.ge
+                    _id: 62b86377ad93686e784f8ea2
+                    name: nina
+                    instrument: kkk
+                    orbitLength: 42
+                    color: '#453454'
+                    biography: biography
+
+                  
+                    
+  /band-member/{id}:
+   get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: Band Member ID
+      tags:
+        - Band Members
+      security:
+        - bearerAuth: []
+      responses:
+        '200': 
+          description: Returns band member's detailed information.
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  bandMember:
+                    type: object
+                    properties:
+                      name: 
+                        type: string
+                      instrument: 
+                        type: string
+                      orbitLength: 
+                        type: number
+                      color: 
+                        type: string
+                      biography: 
+                        type: string
+              example:
+                bandMember:
+                  _id: 62b86377ad93686e784f8ea2
+                  name: nina
+                  instrument: kkk
+                  orbitLength: 42
+                  color: '#453454'
+                  biography: biography
+                    
+
+  /new-member:
+    post:
+      tags:
+        - Band Members
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                instrument:
+                  type: string
+                orbitLength:
+                  type: string
+                color:
+                  type: string
+                biography:
+                  type: string
+              required:
+                - name
+                - instrument
+                - orbitLength
+                - color
+                - biography
+              example:
+                name: nina
+                instrument: kkk
+                orbitLength: 42
+                color: '#453454'
+                biography: biography
+      responses:
+        '201':
+          description: Created
+
+  
+  /edit-member/{id}:
+     patch:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: The band member ID
+      tags:
+        - Band Members
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                instrument:
+                  type: string
+                orbitLength:
+                  type: string
+                color:
+                  type: string
+                biography:
+                  type: string
+              required:
+                - name
+                - instrument
+                - orbitLength
+                - color
+                - biography
+              example:
+                name: nina
+                instrument: kkk
+                orbitLength: 42
+                color: '#453454'
+                biography: biography
+      responses:
+        '200':
+          description: updated
+  
+  /delete-member:
+    delete:
+      tags:
+        - Band Members
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+              required:
+                - id
+              example:
+                id: 62a3372b61d0d7839c1cb687
+      responses:
+        '200':
+          description: Deleted

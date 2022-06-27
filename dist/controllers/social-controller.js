@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMember = exports.editMember = exports.addNewMember = exports.getMemberById = exports.getMembers = void 0;
+exports.deleteSocial = exports.editSocial = exports.addSocial = exports.getSocialById = exports.getSocials = void 0;
 const express_validator_1 = require("express-validator");
-const BandMember_1 = __importDefault(require("../models/BandMember"));
-const getMembers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const Band_1 = __importDefault(require("../models/Band"));
+const getSocials = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const bandMembers = yield BandMember_1.default.find()
+        const socials = yield Band_1.default.find()
             .select('-__v');
-        res.status(200).json(bandMembers);
+        res.status(200).json(socials);
     }
     catch (err) {
         if (!err.statusCode) {
@@ -28,18 +28,18 @@ const getMembers = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         next(err);
     }
 });
-exports.getMembers = getMembers;
-const getMemberById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { memberId } = req.params;
-    if (!memberId.match(/^[0-9a-fA-F]{24}$/))
+exports.getSocials = getSocials;
+const getSocialById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { socialId } = req.params;
+    if (!socialId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const bandMember = yield BandMember_1.default.findById(memberId)
+        const socials = yield Band_1.default.findById(socialId)
             .select('-__v');
-        if (!bandMember)
-            res.status(404).json({ message: 'Could not find any band member' });
+        if (!socials)
+            res.status(404).json({ message: 'Could not find any social links' });
         res.status(200).json({
-            bandMember,
+            socials,
         });
     }
     catch (err) {
@@ -49,31 +49,28 @@ const getMemberById = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(err);
     }
 });
-exports.getMemberById = getMemberById;
-const addNewMember = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getSocialById = getSocialById;
+const addSocial = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         res.status(422).json({ errorMessage: errors.array()[0].msg });
         return;
     }
-    const { name, instrument, orbitLength, color, biography } = req.body;
+    const { name, url } = req.body;
     try {
-        const exists = yield BandMember_1.default.findOne({ name });
+        const exists = yield Band_1.default.findOne({ name });
         if (exists) {
             res.status(409).json({
-                message: 'Band member with this name already exists!',
+                message: 'social media with this name already exists!',
             });
             return;
         }
-        const brandMember = yield BandMember_1.default.create({
+        const brandMember = yield Band_1.default.create({
             name,
-            instrument,
-            orbitLength,
-            color,
-            biography
+            url
         });
         res.status(201).json({
-            message: 'Band member Created Successfully',
+            message: 'Social media Created Successfully',
             brandMember,
         });
     }
@@ -84,26 +81,26 @@ const addNewMember = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(err);
     }
 });
-exports.addNewMember = addNewMember;
-const editMember = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { memberId } = req.params;
+exports.addSocial = addSocial;
+const editSocial = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { socialId } = req.params;
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty())
         res.status(422).json({ errorMessage: errors.array()[0].msg });
-    if (!memberId.match(/^[0-9a-fA-F]{24}$/))
+    if (!socialId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const bandMember = yield BandMember_1.default.findById(memberId);
-        if (!bandMember) {
-            res.status(404).json({ message: 'Could not find any band member' });
-            const error = new Error('Could not find any band member');
+        const socials = yield Band_1.default.findById(socialId);
+        if (!socials) {
+            res.status(404).json({ message: 'Could not find any band' });
+            const error = new Error('Could not find any band');
             error.statusCode = 404;
             throw error;
         }
-        const updatedBandMember = yield BandMember_1.default.findByIdAndUpdate(memberId, req.body, {
+        const updatedSocial = yield Band_1.default.findByIdAndUpdate(socialId, req.body, {
             new: true,
         });
-        res.status(200).json({ message: 'Band member updated!', updatedBandMember });
+        res.status(200).json({ message: 'Social info updated!', updatedSocial });
     }
     catch (err) {
         if (!err.statusCode) {
@@ -112,21 +109,21 @@ const editMember = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         next(err);
     }
 });
-exports.editMember = editMember;
-const deleteMember = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.body;
-    if (!id.match(/^[0-9a-fA-F]{24}$/))
+exports.editSocial = editSocial;
+const deleteSocial = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { socialId } = req.body;
+    if (!socialId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const bandMember = yield BandMember_1.default.findById(id);
-        if (!bandMember) {
-            res.status(404).json({ message: 'Could not find any band member' });
-            const error = new Error('Could not find any band member');
+        const social = yield Band_1.default.findById(socialId);
+        if (!social) {
+            res.status(404).json({ message: 'Could not find any social media' });
+            const error = new Error('Could not find any social media');
             error.statusCode = 404;
             throw error;
         }
-        bandMember.remove();
-        res.status(200).json({ message: 'Band member was deleted successfully' });
+        social.remove();
+        res.status(200).json({ message: 'Social media was deleted successfully' });
     }
     catch (err) {
         if (!err.statusCode) {
@@ -135,4 +132,4 @@ const deleteMember = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(err);
     }
 });
-exports.deleteMember = deleteMember;
+exports.deleteSocial = deleteSocial;

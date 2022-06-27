@@ -19,8 +19,6 @@ const mongo_1 = __importDefault(require("../config/mongo"));
 const schema = {
     properties: {
         _aboutBand: {
-            // pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            // message: 'Enter valid email',
             required: true,
         },
     },

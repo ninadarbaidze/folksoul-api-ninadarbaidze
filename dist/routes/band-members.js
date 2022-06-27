@@ -8,7 +8,8 @@ const band_members_controller_1 = require("../controllers/band-members-controlle
 const band_schema_1 = __importDefault(require("../schemas/band-schema"));
 const router = express_1.default.Router();
 // add isAuth
-router.get('/band-member/:memberId', (0, band_schema_1.default)(), band_members_controller_1.getMemberById);
+router.get('/band-members/', band_members_controller_1.getMembers);
+router.get('/band-member/:memberId', band_members_controller_1.getMemberById);
 router.post('/new-member', (0, band_schema_1.default)(), band_members_controller_1.addNewMember);
 router.patch('/edit-member/:memberId', (0, band_schema_1.default)(), band_members_controller_1.editMember);
 router.delete('/delete-member', (0, band_schema_1.default)(), band_members_controller_1.deleteMember);

@@ -6,6 +6,20 @@ interface Error  {
     statusCode?: number;
   }
 
+
+  export const getMembers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const bandMembers = await BandMember.find()
+        .select('-__v')
+      res.status(200).json(bandMembers)
+    } catch (err:any) {
+      if (!err.statusCode) {
+        err.statusCode = 500
+      }
+      next(err)
+    }
+  }
+
 export const getMemberById = async (req: Request, res: Response, next: NextFunction) => {
     const { memberId } = req.params
     if (!memberId.match(/^[0-9a-fA-F]{24}$/))

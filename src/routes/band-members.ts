@@ -1,5 +1,5 @@
 import express from 'express'
-import { getMemberById, addNewMember, editMember, deleteMember} from '../controllers/band-members-controller'
+import { getMembers, getMemberById, addNewMember, editMember, deleteMember} from '../controllers/band-members-controller'
 import  validateBandMember  from '../schemas/band-schema'
 import isAuth from '../middlewares/auth-middleware'
 
@@ -7,7 +7,8 @@ import isAuth from '../middlewares/auth-middleware'
 const router = express.Router()
 
 // add isAuth
-router.get('/band-member/:memberId',  validateBandMember(), getMemberById)
+router.get('/band-members/', getMembers)
+router.get('/band-member/:memberId', getMemberById)
 router.post('/new-member',  validateBandMember(), addNewMember)
 router.patch('/edit-member/:memberId', validateBandMember(), editMember)
 router.delete('/delete-member', validateBandMember(), deleteMember)
