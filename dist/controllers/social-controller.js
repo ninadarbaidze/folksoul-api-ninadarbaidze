@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSocial = exports.editSocial = exports.addSocial = exports.getSocialById = exports.getSocials = void 0;
 const express_validator_1 = require("express-validator");
-const Band_1 = __importDefault(require("../models/Band"));
+const SocialLinks_1 = __importDefault(require("../models/SocialLinks"));
 const getSocials = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const socials = yield Band_1.default.find()
+        const socials = yield SocialLinks_1.default.find()
             .select('-__v');
         res.status(200).json(socials);
     }
@@ -34,7 +34,7 @@ const getSocialById = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     if (!socialId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const socials = yield Band_1.default.findById(socialId)
+        const socials = yield SocialLinks_1.default.findById(socialId)
             .select('-__v');
         if (!socials)
             res.status(404).json({ message: 'Could not find any social links' });
@@ -58,20 +58,20 @@ const addSocial = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     }
     const { name, url } = req.body;
     try {
-        const exists = yield Band_1.default.findOne({ name });
+        const exists = yield SocialLinks_1.default.findOne({ name });
         if (exists) {
             res.status(409).json({
                 message: 'social media with this name already exists!',
             });
             return;
         }
-        const brandMember = yield Band_1.default.create({
+        const socialLink = yield SocialLinks_1.default.create({
             name,
             url
         });
         res.status(201).json({
             message: 'Social media Created Successfully',
-            brandMember,
+            socialLink,
         });
     }
     catch (err) {
@@ -90,14 +90,14 @@ const editSocial = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     if (!socialId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const socials = yield Band_1.default.findById(socialId);
+        const socials = yield SocialLinks_1.default.findById(socialId);
         if (!socials) {
             res.status(404).json({ message: 'Could not find any band' });
             const error = new Error('Could not find any band');
             error.statusCode = 404;
             throw error;
         }
-        const updatedSocial = yield Band_1.default.findByIdAndUpdate(socialId, req.body, {
+        const updatedSocial = yield SocialLinks_1.default.findByIdAndUpdate(socialId, req.body, {
             new: true,
         });
         res.status(200).json({ message: 'Social info updated!', updatedSocial });
@@ -115,7 +115,7 @@ const deleteSocial = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     if (!socialId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const social = yield Band_1.default.findById(socialId);
+        const social = yield SocialLinks_1.default.findById(socialId);
         if (!social) {
             res.status(404).json({ message: 'Could not find any social media' });
             const error = new Error('Could not find any social media');

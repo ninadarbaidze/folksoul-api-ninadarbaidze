@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator'
-import  SocialLinks  from '../models/Band'
+import  SocialLinks  from '../models/SocialLinks'
 import express, { Application, Request, Response, NextFunction } from 'express';
 
 interface Error  {
@@ -58,14 +58,14 @@ export const getSocialById = async (req: Request, res: Response, next: NextFunct
         })
         return
       }
-      const brandMember = await SocialLinks.create({
+      const socialLink = await SocialLinks.create({
         name,
         url
 
       })
       res.status(201).json({
         message: 'Social media Created Successfully',
-        brandMember,
+        socialLink,
       })
     } catch (err: any) {
       if (!err.statusCode) {

@@ -20,12 +20,12 @@ const getBandById = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     if (!bandId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const bandMember = yield Band_1.default.findById(bandId)
+        const band = yield Band_1.default.findById(bandId)
             .select('-__v');
-        if (!bandMember)
-            res.status(404).json({ message: 'Could not find any band member' });
+        if (!band)
+            res.status(404).json({ message: 'Could not find any band' });
         res.status(200).json({
-            bandMember,
+            band,
         });
     }
     catch (err) {
@@ -44,17 +44,17 @@ const editBand = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     if (!bandId.match(/^[0-9a-fA-F]{24}$/))
         res.status(422).json({ message: 'Please provide a valid id' });
     try {
-        const bandMember = yield Band_1.default.findById(bandId);
-        if (!bandMember) {
+        const band = yield Band_1.default.findById(bandId);
+        if (!band) {
             res.status(404).json({ message: 'Could not find any band' });
             const error = new Error('Could not find any band');
             error.statusCode = 404;
             throw error;
         }
-        const updatedBandMember = yield Band_1.default.findByIdAndUpdate(bandId, req.body, {
+        const updatedBand = yield Band_1.default.findByIdAndUpdate(bandId, req.body, {
             new: true,
         });
-        res.status(200).json({ message: 'Band info updated!', updatedBandMember });
+        res.status(200).json({ message: 'Band info updated!', updatedBand });
     }
     catch (err) {
         if (!err.statusCode) {

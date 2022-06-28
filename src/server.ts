@@ -8,6 +8,7 @@ import YAML from 'yamljs'
 import authRoutes from './routes/auth'
 import bandMemberRoutes from './routes/band-members'
 import bandRoutes from './routes/band'
+import socialRoutes from './routes/social'
 
 
 const server = express();
@@ -23,6 +24,7 @@ server.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument))
 server.use(authRoutes)
 server.use(bandMemberRoutes)
 server.use(bandRoutes)
+server.use(socialRoutes)
 
 const PORT = 3000;
 

@@ -10,8 +10,8 @@ const router = express_1.default.Router();
 // add isAuth
 router.get('/social-media/', social_controller_1.getSocials);
 router.get('/social-media/:socialId', social_controller_1.getSocialById);
-router.post('/social-media/', social_schema_1.default, social_controller_1.addSocial);
-router.put('/edit-social/:socialId', social_schema_1.default, social_controller_1.editSocial);
-router.delete('/delete-social/:socialId', social_schema_1.default, social_controller_1.deleteSocial);
+router.post('/add-social', (0, social_schema_1.default)(), social_controller_1.addSocial);
+router.put('/edit-social/:socialId', (0, social_schema_1.default)(), social_controller_1.editSocial);
+router.delete('/delete-social/', (0, social_schema_1.default)(), social_controller_1.deleteSocial);
 // router.post('/change-band-cover', validateBandMember(), changeMemberAvatar)
 exports.default = router;

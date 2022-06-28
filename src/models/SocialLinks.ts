@@ -17,6 +17,6 @@ const socialLinkSchema = new Schema(
   { versionKey: false }
 )
 
-const SocialLinks = mongoose.model('SocialLink', socialLinkSchema)
+const SocialLinks = mongoose.model('SocialLinks', socialLinkSchema)
 
 export default SocialLinks
