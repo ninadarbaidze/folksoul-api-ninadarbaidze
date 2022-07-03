@@ -13,7 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const changeMemberAvatar = async (req, res, next) => {
   const memberId = req.body.memberId;
-  const imageUrl = req.body.imageUrl;
+  const imageUrl = req.file;
+  console.log(imageUrl);
 
   try {
     var _bandMember$image, _bandMember$image2;
@@ -27,12 +28,12 @@ const changeMemberAvatar = async (req, res, next) => {
     // }
     const image = await _Image.default.create({
       memberId,
-      imageUrl
+      imageUrl: imageUrl.path
     });
     const bandMember = await _BandMember.default.findById(memberId);
     bandMember === null || bandMember === void 0 ? void 0 : (_bandMember$image = bandMember.image) === null || _bandMember$image === void 0 ? void 0 : _bandMember$image.pop();
     bandMember === null || bandMember === void 0 ? void 0 : (_bandMember$image2 = bandMember.image) === null || _bandMember$image2 === void 0 ? void 0 : _bandMember$image2.push(image);
-    await (bandMember === null || bandMember === void 0 ? void 0 : bandMember.save());
+    await bandMember.save();
     res.status(201).json({
       message: 'Image was uploaded Successfully',
       image

@@ -18,35 +18,35 @@ import path from 'path'
 const server = express();
 const swaggerDocument = YAML.load('./src/config/swagger.yaml') as any
 
-const fileStorage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, 'images');
-  },
-  filename: (_req, file, cb) => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
-  }
-});
+// const fileStorage = multer.diskStorage({
+//   destination: (_req, _file, cb) => {
+//     cb(null, 'images');
+//   },
+//   filename: (_req, file, cb) => {
+//     cb(null, new Date().toISOString() + '-' + file.originalname);
+//   }
+// });
 
-const fileFilter = (_req: any, file: { mimetype: string; }, cb: (arg0: null, arg1: boolean) => void) => {
-  if (
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg'
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+// const fileFilter = (_req: any, file: any, cb: any) => {
+//   if (
+//     file.mimetype === 'image/png' ||
+//     file.mimetype === 'image/jpg' ||
+//     file.mimetype === 'image/jpeg'
+//   ) {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
 
 dotenv.config()
 server.use(bodyParser.json())
 
-server.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
-);
-server.use('/images', express.static(path.join(__dirname, 'images')));
-
+// server.use(
+//   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+// );
+server.use('/images', express.static('images'));
 connectMongoose()
 server.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument))
 // server.use('/api-docs', swaggerMiddleware)

@@ -13,7 +13,8 @@ interface Error  {
   export const changeMemberAvatar = async (req: Request, res: Response, next: NextFunction) => {
 
     const memberId = req.body.memberId
-    const imageUrl = req.body.imageUrl
+    const imageUrl = req.file!
+    console.log(imageUrl)
   
     try {
       // const exists = await Image.findOne({ name })
@@ -25,14 +26,14 @@ interface Error  {
       // }
       const image = await Image.create({
         memberId,
-        imageUrl
+        imageUrl: imageUrl.path,
 
       })
       const bandMember = await BandMembers.findById(memberId)
       bandMember?.image?.pop()
       bandMember?.image?.push(image)
 
-      await bandMember?.save()
+      await bandMember!.save()
       res.status(201).json({
         message: 'Image was uploaded Successfully',
         image,

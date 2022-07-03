@@ -24,41 +24,38 @@ var _image = _interopRequireDefault(require("./routes/image"));
 
 var _corsMiddleware = _interopRequireDefault(require("./middlewares/cors-middleware"));
 
-var _multer = _interopRequireDefault(require("multer"));
-
-var _path = _interopRequireDefault(require("path"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const server = (0, _express.default)();
 
-const swaggerDocument = _yamljs.default.load('./src/config/swagger.yaml');
+const swaggerDocument = _yamljs.default.load('./src/config/swagger.yaml'); // const fileStorage = multer.diskStorage({
+//   destination: (_req, _file, cb) => {
+//     cb(null, 'images');
+//   },
+//   filename: (_req, file, cb) => {
+//     cb(null, new Date().toISOString() + '-' + file.originalname);
+//   }
+// });
+// const fileFilter = (_req: any, file: any, cb: any) => {
+//   if (
+//     file.mimetype === 'image/png' ||
+//     file.mimetype === 'image/jpg' ||
+//     file.mimetype === 'image/jpeg'
+//   ) {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
 
-const fileStorage = _multer.default.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, 'images');
-  },
-  filename: (_req, file, cb) => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
-  }
-});
-
-const fileFilter = (_req, file, cb) => {
-  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
 
 _dotenv.default.config();
 
-server.use(_bodyParser.default.json());
-server.use((0, _multer.default)({
-  storage: fileStorage,
-  fileFilter: fileFilter
-}).single('image'));
-server.use('/images', _express.default.static(_path.default.join(__dirname, 'images')));
+server.use(_bodyParser.default.json()); // server.use(
+//   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+// );
+
+server.use('/images', _express.default.static('images'));
 (0, _mongo.default)();
 server.use('/api-docs', _swaggerUiExpress.default.serve, _swaggerUiExpress.default.setup(swaggerDocument)); // server.use('/api-docs', swaggerMiddleware)
 
