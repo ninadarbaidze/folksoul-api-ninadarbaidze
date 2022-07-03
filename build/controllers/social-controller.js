@@ -11,7 +11,7 @@ var _SocialLinks = _interopRequireDefault(require("../models/SocialLinks"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const getSocials = async (req, res, next) => {
+const getSocials = async (_req, res, next) => {
   try {
     const socials = await _SocialLinks.default.find().select('-__v');
     res.status(200).json(socials);

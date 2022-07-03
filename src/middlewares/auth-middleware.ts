@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import express, { Application, Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 interface Error  {
   statusCode?: number;

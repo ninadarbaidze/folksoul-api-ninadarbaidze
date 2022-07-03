@@ -70,13 +70,26 @@ paths:
                       type: string
                     biography: 
                       type: string
+                    image:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            imageUrl: 
+                              type: string
+                            memberId:
+                              type: string
                   example:
                     _id: 62b86377ad93686e784f8ea2
-                    name: nina
-                    instrument: kkk
+                    name: ნინა
+                    instrument: პიანინო
                     orbitLength: 42
                     color: '#453454'
-                    biography: biography
+                    biography: მე ვარ ნინა
+                    image:
+                      - _id: 62a45674dcc55a6203b922b8
+                        imageUrl: 'images/new-image.png'
+                        memberId: 62a45674dcc55a6203b9922b9
 
                   
                     
@@ -115,14 +128,27 @@ paths:
                         type: string
                       biography: 
                         type: string
+                      image:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            imageUrl: 
+                              type: string
+                            memberId:
+                              type: string
               example:
                 bandMember:
-                  _id: 62b86377ad93686e784f8ea2
-                  name: nina
-                  instrument: kkk
-                  orbitLength: 42
-                  color: '#453454'
-                  biography: biography
+                    _id: 62b86377ad93686e784f8ea2
+                    name: ნინა
+                    instrument: პიანინო
+                    orbitLength: 42
+                    color: '#453454'
+                    biography: მე ვარ ნინა
+                    image:
+                      - _id: 62a45674dcc55a6203b922b8
+                        imageUrl: 'images/new-image.png'
+                        memberId: 62a45674dcc55a6203b9922b9
                     
 
   /new-member:
@@ -154,11 +180,12 @@ paths:
                 - color
                 - biography
               example:
-                name: nina
-                instrument: kkk
+                name: ნინა
+                instrument: პიანინო
                 orbitLength: 42
                 color: '#453454'
-                biography: biography
+                biography: მე ვარ ნინა
+                image: []
       responses:
         '201':
           description: Created
@@ -194,6 +221,8 @@ paths:
                   type: string
                 biography:
                   type: string
+                image:
+                  type: array
               required:
                 - name
                 - instrument
@@ -206,6 +235,7 @@ paths:
                 orbitLength: 42
                 color: '#453454'
                 biography: biography
+                image: []
       responses:
         '200':
           description: updated
@@ -228,7 +258,32 @@ paths:
         '200':
           description: Deleted
 
-#
+  /change-avatar:
+    post:
+      summary: Upload avatar
+      tags:
+        - Avatar
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageUrl:
+                  type: string
+                memberId:
+                  type: string
+              required:
+                - imageUrl
+                - instmemberIdrument
+              example:
+                imageUrl: 'images/16568595358612021-03-12 at 12.21.29.jpeg'
+                memberId: 62c19cc755e82e76bf51997d
+      responses:
+        '201':
+          description: Created
 
   /social-media:
     get:

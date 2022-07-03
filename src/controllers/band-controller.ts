@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator'
 import  Band  from '../models/Band'
-import express, { Application, Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 interface Error  {
     statusCode?: number;

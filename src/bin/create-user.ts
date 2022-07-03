@@ -7,8 +7,6 @@ import connectMongoose from '../config/mongo'
 const schema = {
   properties: {
     _username: {
-      // pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-      // message: 'Enter valid email',
       required: true,
     },
     _password: {

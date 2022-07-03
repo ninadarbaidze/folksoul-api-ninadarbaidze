@@ -1,7 +1,6 @@
 import express from 'express'
 import { changeMemberAvatar} from '../controllers/image-controllers'
 import multer from 'multer';
-import path from 'path'
 
 const storageConfig = multer.diskStorage({
   destination: function(_req, _file, cb) {

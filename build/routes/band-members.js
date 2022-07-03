@@ -15,8 +15,7 @@ var _authMiddleware = _interopRequireDefault(require("../middlewares/auth-middle
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const router = _express.default.Router(); // add isAuth
-
+const router = _express.default.Router();
 
 router.get('/band-members/', _authMiddleware.default, _bandMembersController.getMembers);
 router.get('/band-member/:memberId', _authMiddleware.default, _bandMembersController.getMemberById);

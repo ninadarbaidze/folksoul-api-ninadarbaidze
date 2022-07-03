@@ -1,12 +1,12 @@
 import { validationResult } from 'express-validator'
 import  SocialLinks  from '../models/SocialLinks'
-import express, { Application, Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 interface Error  {
     statusCode?: number;
   }
 
-  export const getSocials = async (req: Request, res: Response, next: NextFunction) => {
+  export const getSocials = async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const socials = await SocialLinks.find()
         .select('-__v')

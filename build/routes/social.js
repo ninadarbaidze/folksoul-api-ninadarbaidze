@@ -15,14 +15,12 @@ var _authMiddleware = _interopRequireDefault(require("../middlewares/auth-middle
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const router = _express.default.Router(); // add isAuth
-
+const router = _express.default.Router();
 
 router.get('/social-media/', _socialController.getSocials);
 router.get('/social-media/:socialId', _socialController.getSocialById);
 router.post('/add-social', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.addSocial);
 router.put('/edit-social/:socialId', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.editSocial);
-router.delete('/delete-social/', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.deleteSocial); // router.post('/change-band-cover', validateBandMember(), changeMemberAvatar)
-
+router.delete('/delete-social/', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.deleteSocial);
 var _default = router;
 exports.default = _default;

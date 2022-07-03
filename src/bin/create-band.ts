@@ -1,5 +1,4 @@
 import prompt from 'prompt' 
-import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 import Band from '../models/Band'
 import connectMongoose from '../config/mongo'

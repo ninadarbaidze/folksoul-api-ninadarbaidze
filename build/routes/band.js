@@ -13,11 +13,9 @@ var _authMiddleware = _interopRequireDefault(require("../middlewares/auth-middle
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const router = _express.default.Router(); // add isAuth
-
+const router = _express.default.Router();
 
 router.get('/about-band/:bandId', _authMiddleware.default, _bandController.getBandById);
-router.patch('/edit-band/:bandId', _authMiddleware.default, _bandController.editBand); // router.post('/change-band-cover', validateBandMember(), changeMemberAvatar)
-
+router.patch('/edit-band/:bandId', _authMiddleware.default, _bandController.editBand);
 var _default = router;
 exports.default = _default;

@@ -15,8 +15,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const schema = {
   properties: {
     _username: {
-      // pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-      // message: 'Enter valid email',
       required: true
     },
     _password: {
