@@ -10,7 +10,7 @@ interface Error  {
   export const getMembers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const bandMembers = await BandMember.find()
-        .select('-__v')
+        .select('-__v').populate({ path: 'image'})
       res.status(200).json(bandMembers)
     } catch (err:any) {
       if (!err.statusCode) {
@@ -117,12 +117,12 @@ export const getMemberById = async (req: Request, res: Response, next: NextFunct
   }
 
   export const deleteMember = async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.body
-    if (!id.match(/^[0-9a-fA-F]{24}$/))
+    const { memberId } = req.params
+    if (!memberId.match(/^[0-9a-fA-F]{24}$/))
       res.status(422).json({ message: 'Please provide a valid id' })
   
     try {
-      const bandMember = await BandMember.findById(id)
+      const bandMember = await BandMember.findById(memberId)
       if (!bandMember) {
         res.status(404).json({ message: 'Could not find any band member' })
         const error = new Error('Could not find any band member') as Error

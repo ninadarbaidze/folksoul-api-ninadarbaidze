@@ -32,7 +32,11 @@ const brandMemberSchema = new Schema({
   biography: {
     type: String,
     required: true
-  }
+  },
+  image: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Image'
+  }]
 }, {
   versionKey: false
 });

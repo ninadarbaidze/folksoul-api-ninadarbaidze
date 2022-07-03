@@ -9,9 +9,9 @@ const router = express.Router()
 // add isAuth
 router.get('/social-media/', getSocials)
 router.get('/social-media/:socialId', getSocialById)
-router.post('/add-social', validateSocials(),  addSocial)
-router.put('/edit-social/:socialId', validateSocials(), editSocial)
-router.delete('/delete-social/', validateSocials(), deleteSocial)
+router.post('/add-social', isAuth, validateSocials(),  addSocial)
+router.put('/edit-social/:socialId', isAuth, validateSocials(), editSocial)
+router.delete('/delete-social/', isAuth, validateSocials(), deleteSocial)
 // router.post('/change-band-cover', validateBandMember(), changeMemberAvatar)
 
 export default router

@@ -13,7 +13,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const getMembers = async (req, res, next) => {
   try {
-    const bandMembers = await _BandMember.default.find().select('-__v');
+    const bandMembers = await _BandMember.default.find().select('-__v').populate({
+      path: 'image'
+    });
     res.status(200).json(bandMembers);
   } catch (err) {
     if (!err.statusCode) {
@@ -149,14 +151,14 @@ exports.editMember = editMember;
 
 const deleteMember = async (req, res, next) => {
   const {
-    id
-  } = req.body;
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) res.status(422).json({
+    memberId
+  } = req.params;
+  if (!memberId.match(/^[0-9a-fA-F]{24}$/)) res.status(422).json({
     message: 'Please provide a valid id'
   });
 
   try {
-    const bandMember = await _BandMember.default.findById(id);
+    const bandMember = await _BandMember.default.findById(memberId);
 
     if (!bandMember) {
       res.status(404).json({
