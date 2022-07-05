@@ -32,3 +32,33 @@ import BandMembers from '../models/BandMember'
     }
   }
 
+
+  export const changeSocialIcon = async (req: Request, res: Response, next: NextFunction) => {
+
+    const socialId = req.body.memberId
+    const imageUrl = req.file!
+  
+    try {
+  
+      const image = await Image.create({
+        socialId,
+        imageUrl: imageUrl.path,
+
+      })
+      const socialLink = await BandMembers.findById(socialId)
+      socialLink?.image?.pop()
+      socialLink?.image?.push(image)
+
+      await socialLink!.save()
+      res.status(201).json({
+        message: 'Image was uploaded Successfully',
+        image,
+      })
+    } catch (err: any) {
+      if (!err.statusCode) {
+        err.statusCode = 500
+      }
+      next(err)
+    }
+  }
+  

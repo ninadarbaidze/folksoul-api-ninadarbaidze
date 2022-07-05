@@ -1,5 +1,5 @@
 import express from 'express'
-import { changeMemberAvatar} from '../controllers/image-controllers'
+import { changeMemberAvatar, changeSocialIcon} from '../controllers/image-controllers'
 import multer from 'multer';
 
 const storageConfig = multer.diskStorage({
@@ -17,6 +17,7 @@ const upload = multer({ storage: storageConfig });
 const router = express.Router()
 
 router.post('/change-avatar', upload.single('image'), changeMemberAvatar)
+router.post('/change-social-icon', upload.single('image'), changeSocialIcon)
 
 
 export default router

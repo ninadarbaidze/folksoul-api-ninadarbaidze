@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.changeMemberAvatar = void 0;
+exports.changeSocialIcon = exports.changeMemberAvatar = void 0;
 
 var _Image = _interopRequireDefault(require("../models/Image"));
 
@@ -41,3 +41,33 @@ const changeMemberAvatar = async (req, res, next) => {
 };
 
 exports.changeMemberAvatar = changeMemberAvatar;
+
+const changeSocialIcon = async (req, res, next) => {
+  const socialId = req.body.memberId;
+  const imageUrl = req.file;
+
+  try {
+    var _socialLink$image, _socialLink$image2;
+
+    const image = await _Image.default.create({
+      socialId,
+      imageUrl: imageUrl.path
+    });
+    const socialLink = await _BandMember.default.findById(socialId);
+    socialLink === null || socialLink === void 0 ? void 0 : (_socialLink$image = socialLink.image) === null || _socialLink$image === void 0 ? void 0 : _socialLink$image.pop();
+    socialLink === null || socialLink === void 0 ? void 0 : (_socialLink$image2 = socialLink.image) === null || _socialLink$image2 === void 0 ? void 0 : _socialLink$image2.push(image);
+    await socialLink.save();
+    res.status(201).json({
+      message: 'Image was uploaded Successfully',
+      image
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+
+    next(err);
+  }
+};
+
+exports.changeSocialIcon = changeSocialIcon;

@@ -12,11 +12,18 @@ var _BandMember = _interopRequireDefault(require("../models/BandMember"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const getMembers = async (req, res, next) => {
+  const PAGE_SIZE = 3;
+  const page = parseInt(req.query.page || '0');
+
   try {
     const bandMembers = await _BandMember.default.find().select('-__v').populate({
       path: 'image'
+    }).limit(PAGE_SIZE).skip(PAGE_SIZE * page);
+    const total = await _BandMember.default.countDocuments();
+    res.status(200).json({
+      bandMembers,
+      total: Math.ceil(total / PAGE_SIZE)
     });
-    res.status(200).json(bandMembers);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -183,3 +190,7 @@ const deleteMember = async (req, res, next) => {
 };
 
 exports.deleteMember = deleteMember;
+
+function PAGE_SIZE(PAGE_SIZE) {
+  throw new Error('Function not implemented.');
+}

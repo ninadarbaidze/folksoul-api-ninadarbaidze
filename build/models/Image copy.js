@@ -12,24 +12,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const {
   Schema
 } = _mongoose.default;
-const socialLinkSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  url: {
-    type: String,
-    required: true
-  },
-  image: [{
+const imageSchema = new Schema({
+  imageUrl: Schema.Types.String,
+  memberId: {
     type: Schema.Types.ObjectId,
-    ref: 'SocialImages'
-  }]
+    ref: 'BandMember'
+  }
 }, {
   versionKey: false
 });
 
-const SocialLinks = _mongoose.default.model('SocialLinks', socialLinkSchema);
+const Image = _mongoose.default.model('Image', imageSchema);
 
-var _default = SocialLinks;
+var _default = Image;
 exports.default = _default;

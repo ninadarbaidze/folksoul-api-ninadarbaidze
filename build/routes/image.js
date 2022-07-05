@@ -29,5 +29,6 @@ const upload = (0, _multer.default)({
 const router = _express.default.Router();
 
 router.post('/change-avatar', upload.single('image'), _imageControllers.changeMemberAvatar);
+router.post('/change-social-icon', upload.single('image'), _imageControllers.changeSocialIcon);
 var _default = router;
 exports.default = _default;

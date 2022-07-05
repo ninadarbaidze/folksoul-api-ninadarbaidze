@@ -15,9 +15,10 @@ var _authMiddleware = _interopRequireDefault(require("../middlewares/auth-middle
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const router = _express.default.Router();
+const router = _express.default.Router(); //add isAuth
 
-router.get('/band-members/', _authMiddleware.default, _bandMembersController.getMembers);
+
+router.get('/band-members/', _bandMembersController.getMembers);
 router.get('/band-member/:memberId', _authMiddleware.default, _bandMembersController.getMemberById);
 router.post('/new-member', _authMiddleware.default, (0, _bandSchema.default)(), _bandMembersController.addNewMember);
 router.patch('/edit-member/:memberId', _authMiddleware.default, (0, _bandSchema.default)(), _bandMembersController.editMember);

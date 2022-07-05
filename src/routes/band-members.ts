@@ -6,7 +6,8 @@ import isAuth from '../middlewares/auth-middleware'
 
 const router = express.Router()
 
-router.get('/band-members/', isAuth, getMembers)
+//add isAuth
+router.get('/band-members/',  getMembers)
 router.get('/band-member/:memberId', isAuth, getMemberById)
 router.post('/new-member', isAuth, validateBandMember(), addNewMember)
 router.patch('/edit-member/:memberId', isAuth, validateBandMember(), editMember)

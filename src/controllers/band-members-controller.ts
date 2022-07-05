@@ -8,10 +8,13 @@ interface Error  {
 
 
   export const getMembers = async (req: Request, res: Response, next: NextFunction) => {
+    const PAGE_SIZE = 3
+    const page = parseInt(req.query.page as string || '0') 
     try {
       const bandMembers = await BandMember.find()
-        .select('-__v').populate({ path: 'image'})
-      res.status(200).json(bandMembers)
+        .select('-__v').populate({ path: 'image'}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+      const total = await BandMember.countDocuments()
+      res.status(200).json({bandMembers, total: Math.ceil(total / PAGE_SIZE)})
     } catch (err:any) {
       if (!err.statusCode) {
         err.statusCode = 500
@@ -138,3 +141,7 @@ export const getMemberById = async (req: Request, res: Response, next: NextFunct
       next(err)
     }
   }
+
+function PAGE_SIZE(PAGE_SIZE: any) {
+  throw new Error('Function not implemented.');
+}
