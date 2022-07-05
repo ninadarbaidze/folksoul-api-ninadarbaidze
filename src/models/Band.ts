@@ -7,7 +7,13 @@ const brandSchema = new Schema(
     about: {
       type: String,
       required: true
-    }
+    },
+    image: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'BandImages'
+      }
+    ]
 
   },
   { versionKey: false }

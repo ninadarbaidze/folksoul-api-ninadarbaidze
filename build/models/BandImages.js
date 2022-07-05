@@ -12,20 +12,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const {
   Schema
 } = _mongoose.default;
-const brandSchema = new Schema({
-  about: {
-    type: String,
-    required: true
-  },
-  image: [{
+const BandImageSchema = new Schema({
+  imageUrl: Schema.Types.String,
+  bandId: {
     type: Schema.Types.ObjectId,
-    ref: 'BandImages'
-  }]
+    ref: 'Band'
+  }
 }, {
   versionKey: false
 });
 
-const Band = _mongoose.default.model('Band', brandSchema);
+const BandImages = _mongoose.default.model('BandImages', BandImageSchema);
 
-var _default = Band;
+var _default = BandImages;
 exports.default = _default;

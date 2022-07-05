@@ -30,5 +30,6 @@ const router = _express.default.Router();
 
 router.post('/change-avatar', upload.single('image'), _imageControllers.changeMemberAvatar);
 router.post('/change-social-icon', upload.single('image'), _imageControllers.changeSocialIcon);
+router.post('/change-band-logo', upload.single('image'), _imageControllers.changeBandLogo);
 var _default = router;
 exports.default = _default;
