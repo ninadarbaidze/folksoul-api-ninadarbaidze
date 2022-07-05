@@ -21,6 +21,6 @@ router.get('/social-media/', _socialController.getSocials);
 router.get('/social-media/:socialId', _socialController.getSocialById);
 router.post('/add-social', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.addSocial);
 router.put('/edit-social/:socialId', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.editSocial);
-router.delete('/delete-social/', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.deleteSocial);
+router.delete('/delete-social/:socialId', _authMiddleware.default, (0, _socialSchema.default)(), _socialController.deleteSocial);
 var _default = router;
 exports.default = _default;

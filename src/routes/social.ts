@@ -10,6 +10,6 @@ router.get('/social-media/', getSocials)
 router.get('/social-media/:socialId', getSocialById)
 router.post('/add-social', isAuth, validateSocials(),  addSocial)
 router.put('/edit-social/:socialId', isAuth, validateSocials(), editSocial)
-router.delete('/delete-social/', isAuth, validateSocials(), deleteSocial)
+router.delete('/delete-social/:socialId', isAuth, validateSocials(), deleteSocial)
 
 export default router

@@ -190,7 +190,3 @@ const deleteMember = async (req, res, next) => {
 };
 
 exports.deleteMember = deleteMember;
-
-function PAGE_SIZE(PAGE_SIZE) {
-  throw new Error('Function not implemented.');
-}

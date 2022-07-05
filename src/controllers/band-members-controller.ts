@@ -142,6 +142,4 @@ export const getMemberById = async (req: Request, res: Response, next: NextFunct
     }
   }
 
-function PAGE_SIZE(PAGE_SIZE: any) {
-  throw new Error('Function not implemented.');
-}
+

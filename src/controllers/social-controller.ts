@@ -112,7 +112,7 @@ export const getSocialById = async (req: Request, res: Response, next: NextFunct
 
  
   export const deleteSocial = async (req: Request, res: Response, next: NextFunction) => {
-    const { socialId } = req.body
+    const { socialId } = req.params
     if (!socialId.match(/^[0-9a-fA-F]{24}$/))
       res.status(422).json({ message: 'Please provide a valid id' })
   

@@ -414,28 +414,25 @@ paths:
         '200':
           description: updated
   
-  /delete-social:
+  /delete-social/{id}:
     delete:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            minimum: 1
+            description: The social media ID
       tags:
         - Social Media
       security:
         - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: string
-              required:
-                - id
-              example:
-                id: 62a3372b61d0d7839c1cb687
       responses:
         '200':
           description: Deleted
 
+  
 
   /about-band/{id}:
    get:

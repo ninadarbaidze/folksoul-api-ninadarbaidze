@@ -144,7 +144,7 @@ exports.editSocial = editSocial;
 const deleteSocial = async (req, res, next) => {
   const {
     socialId
-  } = req.body;
+  } = req.params;
   if (!socialId.match(/^[0-9a-fA-F]{24}$/)) res.status(422).json({
     message: 'Please provide a valid id'
   });
