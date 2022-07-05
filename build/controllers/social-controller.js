@@ -13,7 +13,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const getSocials = async (_req, res, next) => {
   try {
-    const socials = await _SocialLinks.default.find().select('-__v');
+    const socials = await _SocialLinks.default.find().select('-__v').populate({
+      path: 'image'
+    });
     res.status(200).json(socials);
   } catch (err) {
     if (!err.statusCode) {

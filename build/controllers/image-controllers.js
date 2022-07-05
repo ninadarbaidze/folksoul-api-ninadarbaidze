@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.changeSocialIcon = exports.changeMemberAvatar = void 0;
 
+var _SocialImages = _interopRequireDefault(require("../models/SocialImages"));
+
+var _SocialLinks = _interopRequireDefault(require("../models/SocialLinks"));
+
 var _Image = _interopRequireDefault(require("../models/Image"));
 
 var _BandMember = _interopRequireDefault(require("../models/BandMember"));
@@ -14,7 +18,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const changeMemberAvatar = async (req, res, next) => {
   const memberId = req.body.memberId;
   const imageUrl = req.file;
-  console.log(imageUrl);
 
   try {
     var _bandMember$image, _bandMember$image2;
@@ -43,17 +46,17 @@ const changeMemberAvatar = async (req, res, next) => {
 exports.changeMemberAvatar = changeMemberAvatar;
 
 const changeSocialIcon = async (req, res, next) => {
-  const socialId = req.body.memberId;
+  const socialId = req.body.socialId;
   const imageUrl = req.file;
 
   try {
     var _socialLink$image, _socialLink$image2;
 
-    const image = await _Image.default.create({
+    const image = await _SocialImages.default.create({
       socialId,
       imageUrl: imageUrl.path
     });
-    const socialLink = await _BandMember.default.findById(socialId);
+    const socialLink = await _SocialLinks.default.findById(socialId);
     socialLink === null || socialLink === void 0 ? void 0 : (_socialLink$image = socialLink.image) === null || _socialLink$image === void 0 ? void 0 : _socialLink$image.pop();
     socialLink === null || socialLink === void 0 ? void 0 : (_socialLink$image2 = socialLink.image) === null || _socialLink$image2 === void 0 ? void 0 : _socialLink$image2.push(image);
     await socialLink.save();

@@ -1,4 +1,6 @@
 import  { Request, Response, NextFunction } from 'express';
+import SocialImages from '../models/SocialImages'
+import SocialLinks from '../models/SocialLinks'
 import Image from '../models/Image'
 import BandMembers from '../models/BandMember'
 
@@ -6,7 +8,6 @@ import BandMembers from '../models/BandMember'
 
     const memberId = req.body.memberId
     const imageUrl = req.file!
-    console.log(imageUrl)
   
     try {
   
@@ -35,17 +36,17 @@ import BandMembers from '../models/BandMember'
 
   export const changeSocialIcon = async (req: Request, res: Response, next: NextFunction) => {
 
-    const socialId = req.body.memberId
+    const socialId = req.body.socialId
     const imageUrl = req.file!
   
     try {
   
-      const image = await Image.create({
+      const image = await SocialImages.create({
         socialId,
         imageUrl: imageUrl.path,
 
       })
-      const socialLink = await BandMembers.findById(socialId)
+      const socialLink = await SocialLinks.findById(socialId)
       socialLink?.image?.pop()
       socialLink?.image?.push(image)
 

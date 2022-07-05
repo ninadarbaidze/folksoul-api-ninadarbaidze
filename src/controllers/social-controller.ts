@@ -9,7 +9,7 @@ interface Error  {
   export const getSocials = async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const socials = await SocialLinks.find()
-        .select('-__v')
+        .select('-__v').populate({ path: 'image'})
       res.status(200).json(socials)
     } catch (err:any) {
       if (!err.statusCode) {
