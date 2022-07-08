@@ -14,16 +14,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const getMembers = async (req, res, next) => {
   const PAGE_SIZE = 3;
   const page = parseInt(req.query.page || '0');
+  let bandMembers;
 
   try {
-    const bandMembers = await _BandMember.default.find().select('-__v').populate({
-      path: 'image'
-    }).limit(PAGE_SIZE).skip(PAGE_SIZE * page);
-    const total = await _BandMember.default.countDocuments();
-    res.status(200).json({
-      bandMembers,
-      total: Math.ceil(total / PAGE_SIZE)
-    });
+    if (req.query.page) {
+      bandMembers = await _BandMember.default.find().select('-__v').populate({
+        path: 'image'
+      }).limit(PAGE_SIZE).skip(PAGE_SIZE * page);
+      const total = await _BandMember.default.countDocuments();
+      res.status(200).json({
+        bandMembers,
+        total: Math.ceil(total / PAGE_SIZE)
+      });
+    } else {
+      bandMembers = await _BandMember.default.find().select('-__v').sort({
+        'orbitLength': 'descending'
+      }).populate({
+        path: 'image'
+      });
+      res.status(200).json(bandMembers);
+    }
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

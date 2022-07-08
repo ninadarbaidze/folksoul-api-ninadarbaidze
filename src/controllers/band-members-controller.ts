@@ -7,14 +7,21 @@ interface Error  {
   }
 
 
-  export const getMembers = async (req: Request, res: Response, next: NextFunction) => {
+export const getMembers = async (req: Request, res: Response, next: NextFunction) => {
     const PAGE_SIZE = 3
     const page = parseInt(req.query.page as string || '0') 
+    let bandMembers
     try {
-      const bandMembers = await BandMember.find()
-        .select('-__v').populate({ path: 'image'}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
-      const total = await BandMember.countDocuments()
-      res.status(200).json({bandMembers, total: Math.ceil(total / PAGE_SIZE)})
+      if(req.query.page) {
+         bandMembers = await BandMember.find()
+          .select('-__v').populate({ path: 'image'}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+        const total = await BandMember.countDocuments()
+        res.status(200).json({bandMembers, total: Math.ceil(total / PAGE_SIZE)})
+      } else {
+        bandMembers = await BandMember.find()
+          .select('-__v').sort({'orbitLength': 'descending'}).populate({ path: 'image'})
+        res.status(200).json(bandMembers)
+      }
     } catch (err:any) {
       if (!err.statusCode) {
         err.statusCode = 500

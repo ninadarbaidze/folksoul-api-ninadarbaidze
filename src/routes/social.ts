@@ -7,7 +7,7 @@ import isAuth from '../middlewares/auth-middleware'
 const router = express.Router()
 
 router.get('/social-media/', getSocials)
-router.get('/social-media/:socialId', getSocialById)
+router.get('/social-media/:socialId', isAuth, getSocialById)
 router.post('/add-social', isAuth, validateSocials(),  addSocial)
 router.patch('/edit-social/:socialId', isAuth, validateSocials(), editSocial)
 router.delete('/delete-social/:socialId', isAuth, validateSocials(), deleteSocial)

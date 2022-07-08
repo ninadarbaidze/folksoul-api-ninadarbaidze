@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const swaggerMiddleware = () => {
   const specifications = {
-    customSiteTitle: 'Admin Panel API'
+    customSiteTitle: 'Inside Joke API'
   };
 
   const swaggerDocument = _yamljs.default.load('./src/config/swagger.yaml');

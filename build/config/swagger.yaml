@@ -262,28 +262,72 @@ paths:
     post:
       summary: Upload avatar
       tags:
-        - Avatar
-      security:
-        - bearerAuth: []
+        - Image Uploads
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                imageUrl:
-                  type: string
-                memberId:
-                  type: string
-              required:
-                - imageUrl
-                - instmemberIdrument
-              example:
-                imageUrl: 'images/16568595358612021-03-12 at 12.21.29.jpeg'
-                memberId: 62c19cc755e82e76bf51997d
+            content:
+              multipart/form-data:
+                schema:
+                  type: object
+                  properties:
+                    memberId:
+                      type: string
+                    image:
+                      type: string
+                      format: binary
+                example:
+                  memberId: 62c1c35b55e82e76bf519b1d
+                  image: filename
+                 
       responses:
-        '201':
-          description: Created
+        '200':
+          description: Updated
+
+
+  /change-social-icon:
+    post:
+      summary: Upload Social Icon
+      tags:
+        - Image Uploads
+      requestBody:
+            content:
+              multipart/form-data:
+                schema:
+                  type: object
+                  properties:
+                    socialId:
+                      type: string
+                    image:
+                      type: string
+                      format: binary
+                  example:
+                    socialId: 62c536af82fa198e6148758c
+                    image: filename
+      responses:
+        '200':
+          description: Updated
+ 
+  /change-band-logo:
+    post:
+      summary: Upload Band Logo
+      tags:
+        - Image Uploads
+      requestBody:
+            content:
+              multipart/form-data:
+                schema:
+                  type: object
+                  properties:
+                    bandId:
+                      type: string
+                    image:
+                      type: string
+                      format: binary
+                  example:
+                    bandId: 62b88c20f75abbb01ab2f5b5
+                    image: filename
+      responses:
+        '200':
+          description: Updated
 
   /social-media:
     get:
@@ -432,7 +476,40 @@ paths:
         '200':
           description: Deleted
 
-  
+  /bands:
+    get:
+      tags:
+        - About Band
+      security:
+        - bearerAuth: []  
+      responses:
+        '200': 
+          description: Returns a band.
+          content:
+            application/json:
+              schema: 
+                  type: object
+                  properties:
+                    _id: 
+                      type: string
+                    about: 
+                      type: string
+                    image: 
+                      type: array
+                      items:
+                          type: object
+                          properties:
+                            imageUrl: 
+                              type: string
+                            bandId:
+                              type: string     
+                  example:
+                    _id: 62b88c20f75abbb01ab2f5b5
+                    about: ბენდის შესახებ
+                    image:
+                      - _id: 62a45674dcc55a6203b922b8
+                        imageUrl: 'images/new-image.png'
+                        bandId: 62a45674dcc55a6203b9922b9
 
   /about-band/{id}:
    get:

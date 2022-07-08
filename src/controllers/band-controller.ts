@@ -5,23 +5,13 @@ import { Request, Response, NextFunction } from 'express';
 interface Error  {
     statusCode?: number;
   }
-
-export const getBandById = async (req: Request, res: Response, next: NextFunction) => {
-    const { bandId } = req.params
-    if (!bandId.match(/^[0-9a-fA-F]{24}$/))
-      res.status(422).json({ message: 'Please provide a valid id' })
   
+export const getBand = async (_req: Request, res: Response, next: NextFunction) => {
     try {
-      const band = await Band.findById(bandId)
-        .select('-__v')
-  
-      if (!band)
-        res.status(404).json({ message: 'Could not find any band' })
-  
-      res.status(200).json({
-        band,
-      })
-    } catch (err: any) {
+      const band = await Band.find()
+        .select('-__v').populate({ path: 'image'})
+      res.status(200).json(band[0])
+    } catch (err:any) {
       if (!err.statusCode) {
         err.statusCode = 500
       }

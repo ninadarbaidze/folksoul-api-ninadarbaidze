@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getBandById = exports.editBand = void 0;
+exports.getBand = exports.editBand = void 0;
 
 var _expressValidator = require("express-validator");
 
@@ -11,22 +11,12 @@ var _Band = _interopRequireDefault(require("../models/Band"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const getBandById = async (req, res, next) => {
-  const {
-    bandId
-  } = req.params;
-  if (!bandId.match(/^[0-9a-fA-F]{24}$/)) res.status(422).json({
-    message: 'Please provide a valid id'
-  });
-
+const getBand = async (_req, res, next) => {
   try {
-    const band = await _Band.default.findById(bandId).select('-__v');
-    if (!band) res.status(404).json({
-      message: 'Could not find any band'
+    const band = await _Band.default.find().select('-__v').populate({
+      path: 'image'
     });
-    res.status(200).json({
-      band
-    });
+    res.status(200).json(band[0]);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -36,7 +26,7 @@ const getBandById = async (req, res, next) => {
   }
 };
 
-exports.getBandById = getBandById;
+exports.getBand = getBand;
 
 const editBand = async (req, res, next) => {
   const {

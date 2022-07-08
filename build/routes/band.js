@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = _express.default.Router();
 
-router.get('/about-band/:bandId', _authMiddleware.default, _bandController.getBandById);
+router.get('/bands', _bandController.getBand);
 router.patch('/edit-band/:bandId', _authMiddleware.default, _bandController.editBand);
 var _default = router;
 exports.default = _default;

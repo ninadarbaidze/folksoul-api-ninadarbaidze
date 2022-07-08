@@ -18,6 +18,8 @@ const swaggerDocument = YAML.load('./src/config/swagger.yaml') as any
 dotenv.config()
 server.use(bodyParser.json())
 
+
+
 server.use('/images', express.static('images'));
 connectMongoose()
 server.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument))
