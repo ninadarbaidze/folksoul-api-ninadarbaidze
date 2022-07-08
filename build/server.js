@@ -10,10 +10,6 @@ var _swaggerMiddleware = require("./middlewares/swagger-middleware");
 
 var _mongo = _interopRequireDefault(require("./config/mongo"));
 
-var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
-
-var _yamljs = _interopRequireDefault(require("yamljs"));
-
 var _auth = _interopRequireDefault(require("./routes/auth"));
 
 var _bandMembers = _interopRequireDefault(require("./routes/band-members"));
@@ -30,15 +26,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const server = (0, _express.default)();
 
-const swaggerDocument = _yamljs.default.load('./src/config/swagger.yaml');
-
 _dotenv.default.config();
 
 server.use(_bodyParser.default.json());
 server.use('/images', _express.default.static('images'));
 (0, _mongo.default)();
-server.use('/api-docs', _swaggerUiExpress.default.serve, _swaggerUiExpress.default.setup(swaggerDocument));
-server.use('/api-docs', _swaggerMiddleware.swaggerMiddleware);
+server.use('/api-docs', (0, _swaggerMiddleware.swaggerMiddleware)());
 server.use(_corsMiddleware.default);
 server.use(_auth.default);
 server.use(_bandMembers.default);

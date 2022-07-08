@@ -13,7 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const swaggerMiddleware = () => {
   const specifications = {
-    customSiteTitle: 'Inside Joke API'
+    customSiteTitle: 'FolkSoul API',
+    customCss: '.swagger-ui .topbar { display: none }'
   };
 
   const swaggerDocument = _yamljs.default.load('./src/config/swagger.yaml');
