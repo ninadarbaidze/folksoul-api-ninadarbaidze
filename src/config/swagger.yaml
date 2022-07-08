@@ -46,8 +46,6 @@ paths:
     get:
       tags:
         - Band Members
-      security:
-        - bearerAuth: []  
       responses:
         '200': 
           description: Returns a list of band members.
@@ -147,8 +145,7 @@ paths:
                     biography: მე ვარ ნინა
                     image:
                       - _id: 62a45674dcc55a6203b922b8
-                        imageUrl: 'images/new-image.png'
-                        memberId: 62a45674dcc55a6203b9922b9
+
                     
 
   /new-member:
@@ -332,9 +329,7 @@ paths:
   /social-media:
     get:
       tags:
-        - Social Media
-      security:
-        - bearerAuth: []  
+        - Social Media 
       responses:
         '200': 
           description: Returns a list of social media.
@@ -349,10 +344,26 @@ paths:
                       type: string
                     url: 
                       type: string
+                    image:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            imageUrl: 
+                              type: string
+                            socialId:
+                              type: string
                   example:
                     _id: 62b9cf91d2ee7fff6bf3b7cb
                     name: facebook
                     url: https://www.facebook.com/
+                    image:
+                      - _id: 62a45674dcc55a6203b922b8
+                        imageUrl: 'images/new-image.png'
+                        socialId: 62a45674dcc55a6203b9922b9
+                      
                    
 
                   
@@ -391,6 +402,9 @@ paths:
                     _id: 62b9cf91d2ee7fff6bf3b7cb
                     name: facebook
                     url: https://www.facebook.com/
+                    image:
+                      - _id: 62a45674dcc55a6203b922b8
+                      
                     
 
   /add-social:
@@ -450,10 +464,9 @@ paths:
                 - name
                 - url
               example:
-                socialLink:
-                    _id: 62b9cf91d2ee7fff6bf3b7cb
                     name: facebook
                     url: https://www.facebook.com/
+                    image: []
       responses:
         '200':
           description: updated
@@ -480,8 +493,6 @@ paths:
     get:
       tags:
         - About Band
-      security:
-        - bearerAuth: []  
       responses:
         '200': 
           description: Returns a band.
