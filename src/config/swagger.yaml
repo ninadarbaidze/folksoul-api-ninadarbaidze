@@ -5,7 +5,7 @@ info:
   version: 0.1.9
 
 servers:
-  - url: https://folksoul-api.nina.redberryinternship.ge/api-docs
+  - url: https://folksoul-api.nina.redberryinternship.ge/
     description: production server
   - url: http://localhost:3000/
     description: local server
