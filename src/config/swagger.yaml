@@ -179,7 +179,7 @@ paths:
               example:
                 name: ნინა
                 instrument: პიანინო
-                orbitLength: 42
+                orbitLength: 400
                 color: '#453454'
                 biography: მე ვარ ნინა
                 image: []
