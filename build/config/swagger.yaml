@@ -179,7 +179,7 @@ paths:
               example:
                 name: ნინა
                 instrument: პიანინო
-                orbitLength: 42
+                orbitLength: 400
                 color: '#453454'
                 biography: მე ვარ ნინა
                 image: []
@@ -427,8 +427,6 @@ paths:
                 - name
                 - url
               example:
-                socialLink:
-                    _id: 62b9cf91d2ee7fff6bf3b7cb
                     name: facebook
                     url: https://www.facebook.com/
       responses:

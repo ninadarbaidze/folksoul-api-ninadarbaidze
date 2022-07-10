@@ -116,6 +116,13 @@ const editSocial = async (req, res, next) => {
   try {
     const socials = await _SocialLinks.default.findById(socialId);
 
+    if (socials) {
+      res.status(409).json({
+        message: 'social media with this name already exists!'
+      });
+      return;
+    }
+
     if (!socials) {
       res.status(404).json({
         message: 'Could not find any band'

@@ -86,7 +86,12 @@ export const getSocialById = async (req: Request, res: Response, next: NextFunct
   
     try {
       const socials = await SocialLinks.findById(socialId)
-  
+      if (socials) {
+        res.status(409).json({
+          message: 'social media with this name already exists!',
+        })
+        return
+      }
       if (!socials) {
         res.status(404).json({ message: 'Could not find any band' })
         const error = new Error('Could not find any band') as Error
