@@ -81,7 +81,7 @@ paths:
                     _id: 62b86377ad93686e784f8ea2
                     name: ნინა
                     instrument: პიანინო
-                    orbitLength: 42
+                    orbitLength: 600
                     color: '#453454'
                     biography: მე ვარ ნინა
                     image:
@@ -140,7 +140,7 @@ paths:
                     _id: 62b86377ad93686e784f8ea2
                     name: ნინა
                     instrument: პიანინო
-                    orbitLength: 42
+                    orbitLength: 450
                     color: '#453454'
                     biography: მე ვარ ნინა
                     image:
@@ -229,7 +229,7 @@ paths:
               example:
                 name: nina
                 instrument: kkk
-                orbitLength: 42
+                orbitLength: 500
                 color: '#453454'
                 biography: biography
                 image: []
