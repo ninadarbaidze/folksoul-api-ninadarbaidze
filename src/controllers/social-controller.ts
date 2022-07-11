@@ -6,11 +6,21 @@ interface Error  {
     statusCode?: number;
   }
 
-  export const getSocials = async (_req: Request, res: Response, next: NextFunction) => {
+  export const getSocials = async (req: Request, res: Response, next: NextFunction) => {
+    const PAGE_SIZE = 3
+    const page = parseInt(req.query.page as string || '0') 
+    let socials
     try {
-      const socials = await SocialLinks.find()
-        .select('-__v').populate({ path: 'image'})
-      res.status(200).json(socials)
+      if(req.query.page) {
+        socials = await SocialLinks.find()
+        .select('-__v').populate({ path: 'image'}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+      const total = await SocialLinks.countDocuments()
+      res.status(200).json({socials, total: Math.ceil(total / PAGE_SIZE)})
+      } else {
+        socials = await SocialLinks.find()
+         .select('-__v').populate({ path: 'image'})
+        res.status(200).json(socials)
+      }
     } catch (err:any) {
       if (!err.statusCode) {
         err.statusCode = 500
@@ -86,12 +96,7 @@ export const getSocialById = async (req: Request, res: Response, next: NextFunct
   
     try {
       const socials = await SocialLinks.findById(socialId)
-      if (socials) {
-        res.status(409).json({
-          message: 'social media with this name already exists!',
-        })
-        return
-      }
+      
       if (!socials) {
         res.status(404).json({ message: 'Could not find any band' })
         const error = new Error('Could not find any band') as Error
