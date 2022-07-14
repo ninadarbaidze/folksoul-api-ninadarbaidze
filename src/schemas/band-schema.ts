@@ -19,7 +19,7 @@ const validateBandMember = () => [
   body('color')
   .notEmpty()
   .withMessage('color field is required')
-  .matches(/^#(?:[0-9A-F]{3}){1,2}$/)
+  .matches(/^#(?:[0-9a-fA-F]{3}){1,2}$/)
   .withMessage('color format is invalid'),
   body('biography')
   .notEmpty()
