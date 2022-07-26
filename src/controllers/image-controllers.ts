@@ -1,10 +1,10 @@
 import  { Request, Response, NextFunction } from 'express';
-import SocialImages from '../models/SocialImages'
-import SocialLinks from '../models/SocialLinks'
-import Image from '../models/Image'
-import BandMembers from '../models/BandMember'
-import BandImages from '../models/BandImages'
-import Band from '../models/Band'
+import SocialImages from 'models/SocialImages'
+import SocialLinks from 'models/SocialLinks'
+import Image from 'models/Image'
+import BandMembers from 'models/BandMember'
+import BandImages from 'models/BandImages'
+import Band from 'models/Band'
 
   export const changeMemberAvatar = async (req: Request, res: Response, next: NextFunction) => {
 

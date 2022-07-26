@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import {  Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator'
-import User from '../models/User'
+import User from 'models/User'
 
 interface Error  {
   statusCode?: number;

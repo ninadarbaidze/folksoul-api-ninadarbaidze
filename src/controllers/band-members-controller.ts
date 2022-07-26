@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator'
-import  BandMember  from '../models/BandMember'
+import  BandMember  from 'models/BandMember'
 import { Request, Response, NextFunction } from 'express';
 
 interface Error  {

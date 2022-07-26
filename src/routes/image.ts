@@ -1,5 +1,5 @@
 import express from 'express'
-import { changeMemberAvatar, changeSocialIcon, changeBandLogo} from '../controllers/image-controllers'
+import { changeMemberAvatar, changeSocialIcon, changeBandLogo} from 'controllers/image-controllers'
 import multer from 'multer';
 
 const storageConfig = multer.diskStorage({

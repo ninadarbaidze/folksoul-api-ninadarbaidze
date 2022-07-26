@@ -1,7 +1,7 @@
 import express from 'express'
-import { getSocials, getSocialById, addSocial, editSocial, deleteSocial} from '../controllers/social-controller'
-import  validateSocials  from '../schemas/social-schema'
-import isAuth from '../middlewares/auth-middleware'
+import { getSocials, getSocialById, addSocial, editSocial, deleteSocial} from 'controllers/social-controller'
+import  validateSocials  from 'schemas/social-schema'
+import isAuth from 'middlewares/auth-middleware'
 
 
 const router = express.Router()
