@@ -8,7 +8,7 @@ import bandMemberRoutes from 'routes/band-members'
 import bandRoutes from 'routes/band'
 import socialRoutes from 'routes/social'
 import imageRoutes from 'routes/image'
-import corsMiddleware from 'middlewares/cors-middleware'
+import cors from 'cors'
 
 const server = express();
 
@@ -20,7 +20,7 @@ connectMongoose()
 
 server.use('/api-docs', swaggerMiddleware() as any)
 
-server.use(corsMiddleware)
+server.use(cors())
 
 server.use(authRoutes)
 server.use(bandMemberRoutes)
