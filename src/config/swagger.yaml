@@ -331,6 +331,8 @@ paths:
       summary: Upload avatar
       tags:
         - Image Uploads
+      security:
+        - bearerAuth: []
       requestBody:
             content:
               multipart/form-data:
@@ -363,6 +365,8 @@ paths:
       summary: Upload Social Icon
       tags:
         - Image Uploads
+      security:
+        - bearerAuth: []
       requestBody:
             content:
               multipart/form-data:
@@ -394,6 +398,8 @@ paths:
       summary: Upload Band Logo
       tags:
         - Image Uploads
+      security:
+        - bearerAuth: []
       requestBody:
             content:
               multipart/form-data:
