@@ -1,5 +1,4 @@
 import  { Request, Response, NextFunction } from 'express';
-import SocialImages from 'models/SocialImages'
 import SocialLinks from 'models/SocialLinks'
 import BandMembers from 'models/BandMember'
 import Band from 'models/Band'
@@ -39,20 +38,18 @@ import Band from 'models/Band'
     const imageUrl = req.file!
   
     try {
-  
-      const image = await SocialImages.create({
-        socialId,
-        imageUrl: imageUrl.path,
 
-      })
-      const socialLink = await SocialLinks.findById(socialId)
-      socialLink?.image?.pop()
-      socialLink?.image?.push(image)
+      const socialLink = await SocialLinks.findByIdAndUpdate(
+        socialId,
+        {image: imageUrl.path},
+        {
+          new: true,
+        }
+      )   
 
       await socialLink!.save()
       res.status(201).json({
         message: 'Image was uploaded Successfully',
-        image,
       })
     } catch (err: any) {
       if (!err.statusCode) {

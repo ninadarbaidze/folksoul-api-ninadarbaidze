@@ -13,12 +13,12 @@ interface Error  {
     try {
       if(req.query.page) {
         socials = await SocialLinks.find()
-        .select('-__v').populate({ path: 'image'}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+        .select('-__v').limit(PAGE_SIZE).skip(PAGE_SIZE * page)
       const total = await SocialLinks.countDocuments()
       res.status(200).json({socials, total: Math.ceil(total / PAGE_SIZE)})
       } else {
         socials = await SocialLinks.find()
-         .select('-__v').populate({ path: 'image'})
+         .select('-__v')
         res.status(200).json(socials)
       }
     } catch (err:any) {
@@ -70,7 +70,8 @@ export const getSocialById = async (req: Request, res: Response, next: NextFunct
       }
       const socialLink = await SocialLinks.create({
         name,
-        url
+        url,
+        image: ''
 
       })
       res.status(201).json({

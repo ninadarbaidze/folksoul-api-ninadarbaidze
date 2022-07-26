@@ -12,12 +12,11 @@ const socialLinkSchema = new Schema(
       type: String,
       required: true
     },
-    image: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'SocialImages'
+    image: {
+        type: String,
+        
       }
-    ]
+    
 
   },
   { versionKey: false }
