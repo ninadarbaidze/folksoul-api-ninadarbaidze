@@ -71,19 +71,20 @@ import Band from 'models/Band'
   
     try {
   
-      const image = await BandImages.create({
-        bandId,
-        imageUrl: imageUrl.path,
 
-      })
-      const band = await Band.findById(bandId)
-      band?.image?.pop()
-      band?.image?.push(image)
+      const band = await Band.findByIdAndUpdate(
+        bandId,
+        {image: imageUrl.path},
+        {
+          new: true,
+        }
+      )
+
 
       await band!.save()
       res.status(201).json({
         message: 'Image was uploaded Successfully',
-        image,
+        band,
       })
     } catch (err: any) {
       if (!err.statusCode) {

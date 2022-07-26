@@ -5,10 +5,10 @@ const { Schema } = mongoose
 const BandImageSchema = new Schema(
   {
     imageUrl: Schema.Types.String,
-    bandId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Band',
-    },
+    // bandId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Band',
+    // },
   },
   { versionKey: false }
 )

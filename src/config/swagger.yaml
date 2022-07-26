@@ -39,8 +39,16 @@ paths:
                 username: nina
                 password: nina
       responses:
-        '201':
+        '200':
           description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pbmEiLCJpYXQiOjE2NTg4MjI1MDYsImV4cCI6MTY1ODgyOTcwNn0.YrCi-u5goplJekTCual5ilVrHsU17_TWu68AYG68beY
 
   /band-members:
     get:
@@ -186,6 +194,35 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Band member Created Successfully"
+                  brandMember:
+                    type: object
+                    properties:
+                      name: 
+                        type: string
+                        example: "ნინა"
+                      instrument: 
+                        type: string
+                        example: "პიანინო"
+                      orbitLength: 
+                        type: string
+                        example: 300
+                      color: 
+                        type: string
+                        example: '#453454'
+                      biography: 
+                        type: string
+                        example: მე ვარ ნინა
+                      image: 
+                        type: array
+                        example: []
 
   
   /edit-member/{id}:
@@ -235,7 +272,36 @@ paths:
                 image: []
       responses:
         '200':
-          description: updated
+          description: Updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Band member updated!"
+                  updatedBandMember:
+                    type: object
+                    properties:
+                      name: 
+                        type: string
+                        example: "ნინა"
+                      instrument: 
+                        type: string
+                        example: "პიანინო"
+                      orbitLength: 
+                        type: string
+                        example: 300
+                      color: 
+                        type: string
+                        example: '#453454'
+                      biography: 
+                        type: string
+                        example: მე ვარ ნინა
+                      image: 
+                        type: array
+                        example: []
   
   /delete-member/{id}:
     delete:
@@ -278,7 +344,14 @@ paths:
       responses:
         '200':
           description: Updated
-
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Band member was deleted successfully"
 
   /change-social-icon:
     post:
