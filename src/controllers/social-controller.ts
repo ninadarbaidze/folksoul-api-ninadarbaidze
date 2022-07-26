@@ -1,10 +1,8 @@
 import { validationResult } from 'express-validator'
 import  SocialLinks  from 'models/SocialLinks'
 import { Request, Response, NextFunction } from 'express';
+import {Error} from 'types/defaults'
 
-interface Error  {
-    statusCode?: number;
-  }
 
   export const getSocials = async (req: Request, res: Response, next: NextFunction) => {
     const PAGE_SIZE = 3

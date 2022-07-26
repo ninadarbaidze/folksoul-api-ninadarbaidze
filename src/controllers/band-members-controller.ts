@@ -1,10 +1,8 @@
 import { validationResult } from 'express-validator'
 import  BandMember  from 'models/BandMember'
 import { Request, Response, NextFunction } from 'express';
+import {Error} from 'types/defaults'
 
-interface Error  {
-    statusCode?: number;
-  }
 
 
 export const getMembers = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,9 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express';
-
-interface Error  {
-  statusCode?: number;
-}
+import {Error} from 'types/defaults'
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.get('Authorization')

@@ -1,10 +1,8 @@
 import { validationResult } from 'express-validator'
 import  Band  from 'models/Band'
 import { Request, Response, NextFunction } from 'express';
+import {Error} from 'types/defaults'
 
-interface Error  {
-    statusCode?: number;
-  }
   
 export const getBand = async (_req: Request, res: Response, next: NextFunction) => {
     try {
@@ -18,8 +16,6 @@ export const getBand = async (_req: Request, res: Response, next: NextFunction) 
       next(err)
     }
   }
-
-
 
   export const editBand = async (req: Request, res: Response, next: NextFunction) => {
     const { bandId } = req.params

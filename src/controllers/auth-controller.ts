@@ -3,24 +3,17 @@ import jwt from 'jsonwebtoken'
 import {  Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator'
 import User from 'models/User'
+import {Error, UserTypes} from 'types/defaults'
 
-interface Error  {
-  statusCode?: number;
-}
-
-interface User {
-  username: string,
-  password: string
-}
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
-  const { username, password } = req.body as User
+  const { username, password } = req.body as UserTypes
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     res.status(422).json({ errorMessage: errors.array()[0].msg })
   }
   try {
-    const user = await User.findOne({ username }) as User
+    const user = await User.findOne({ username }) as UserTypes
     if (!user)
       res
         .status(401)
