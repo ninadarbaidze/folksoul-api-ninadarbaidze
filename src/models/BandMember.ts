@@ -24,12 +24,11 @@ const brandMemberSchema = new Schema(
       type: String,
       required: true
     },
-    image: [
+    image: 
       {
-        type: Schema.Types.ObjectId,
-        ref: 'Image'
+        type: String,
       }
-    ]
+    
 
   },
   { versionKey: false }

@@ -1,9 +1,7 @@
 import  { Request, Response, NextFunction } from 'express';
 import SocialImages from 'models/SocialImages'
 import SocialLinks from 'models/SocialLinks'
-import Image from 'models/Image'
 import BandMembers from 'models/BandMember'
-import BandImages from 'models/BandImages'
 import Band from 'models/Band'
 
   export const changeMemberAvatar = async (req: Request, res: Response, next: NextFunction) => {
@@ -13,19 +11,18 @@ import Band from 'models/Band'
   
     try {
   
-      const image = await Image.create({
+      const bandMember = await BandMembers.findByIdAndUpdate(
         memberId,
-        imageUrl: imageUrl.path,
+        {image: imageUrl.path},
+        {
+          new: true,
+        }
+      )      
 
-      })
-      const bandMember = await BandMembers.findById(memberId)
-      bandMember?.image?.pop()
-      bandMember?.image?.push(image)
 
       await bandMember!.save()
       res.status(201).json({
         message: 'Image was uploaded Successfully',
-        image,
       })
     } catch (err: any) {
       if (!err.statusCode) {
@@ -80,11 +77,9 @@ import Band from 'models/Band'
         }
       )
 
-
       await band!.save()
       res.status(201).json({
         message: 'Image was uploaded Successfully',
-        band,
       })
     } catch (err: any) {
       if (!err.statusCode) {

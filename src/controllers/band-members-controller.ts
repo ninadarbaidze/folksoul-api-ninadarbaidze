@@ -14,12 +14,12 @@ export const getMembers = async (req: Request, res: Response, next: NextFunction
     try {
       if(req.query.page) {
          bandMembers = await BandMember.find()
-          .select('-__v').populate({ path: 'image'}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+          .select('-__v').limit(PAGE_SIZE).skip(PAGE_SIZE * page)
         const total = await BandMember.countDocuments()
         res.status(200).json({bandMembers, total: Math.ceil(total / PAGE_SIZE)})
       } else {
         bandMembers = await BandMember.find()
-          .select('-__v').sort({'orbitLength': 'descending'}).populate({ path: 'image'})
+          .select('-__v').sort({'orbitLength': 'descending'})
         res.status(200).json(bandMembers)
       }
     } catch (err:any) {
@@ -75,7 +75,8 @@ export const getMemberById = async (req: Request, res: Response, next: NextFunct
         instrument,
         orbitLength,
         color,
-        biography
+        biography,
+        image: ''
 
       })
       res.status(201).json({
