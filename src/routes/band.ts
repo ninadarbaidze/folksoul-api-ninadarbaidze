@@ -1,6 +1,6 @@
 import express from 'express'
-import {  editBand, getBand} from 'controllers/band-controller'
-import isAuth from 'middlewares/auth-middleware'
+import {  editBand, getBand} from 'controllers'
+import { isAuth } from 'middlewares'
 
 
 const router = express.Router()

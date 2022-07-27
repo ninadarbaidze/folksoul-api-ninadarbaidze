@@ -2,11 +2,12 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import {  Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator'
-import User from 'models/User'
-import {Error, UserTypes} from 'types/defaults'
+import { User } from 'models'
+import {Error, UserTypes} from 'types'
 
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
+
+const login = async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body as UserTypes
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -43,3 +44,6 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     next(err)
   }
 }
+
+
+export default login

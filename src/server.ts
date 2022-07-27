@@ -1,13 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
-import  {swaggerMiddleware} from 'middlewares/swagger-middleware'
-import connectMongoose from 'config/mongo'
-import authRoutes from 'routes/auth'
-import bandMemberRoutes from 'routes/band-members'
-import bandRoutes from 'routes/band'
-import socialRoutes from 'routes/social'
-import imageRoutes from 'routes/image'
+import { swaggerMiddleware } from 'middlewares'
+import { connectMongoose } from 'config'
+import { authRoutes, bandMemberRoutes, bandRoutes, socialRoutes, imageRoutes } from 'routes'
 import cors from 'cors'
 
 const server = express();

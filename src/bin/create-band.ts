@@ -1,7 +1,7 @@
 import prompt from 'prompt' 
 import dotenv from 'dotenv'
 import Band from 'models/Band'
-import connectMongoose from 'config/mongo'
+import { connectMongoose } from 'config'
 
 const schema = {
   properties: {

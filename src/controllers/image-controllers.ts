@@ -1,7 +1,6 @@
 import  { Request, Response, NextFunction } from 'express';
-import SocialLinks from 'models/SocialLinks'
-import BandMembers from 'models/BandMember'
-import Band from 'models/Band'
+import { Band, BandMember, SocialLinks } from 'models'
+
 
   export const changeMemberAvatar = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -10,7 +9,7 @@ import Band from 'models/Band'
   
     try {
   
-      const bandMember = await BandMembers.findByIdAndUpdate(
+      const bandMember = await BandMember.findByIdAndUpdate(
         memberId,
         {image: imageUrl.path},
         {

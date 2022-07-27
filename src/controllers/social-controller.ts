@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator'
-import  SocialLinks  from 'models/SocialLinks'
+import { SocialLinks }  from 'models'
 import { Request, Response, NextFunction } from 'express';
 import {Error} from 'types/defaults'
 

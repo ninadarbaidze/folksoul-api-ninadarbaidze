@@ -1,0 +1,5 @@
+export { default as authRoutes } from './auth'
+export { default as bandRoutes } from './band'
+export { default as bandMemberRoutes } from './band-members'
+export { default as imageRoutes } from './image'
+export { default as socialRoutes } from './social'

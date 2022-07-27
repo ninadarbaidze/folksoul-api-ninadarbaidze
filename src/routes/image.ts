@@ -1,7 +1,7 @@
 import express from 'express'
-import { changeMemberAvatar, changeSocialIcon, changeBandLogo} from 'controllers/image-controllers'
+import { changeMemberAvatar, changeSocialIcon, changeBandLogo} from 'controllers'
 import multer from 'multer';
-import isAuth from 'middlewares/auth-middleware'
+import { isAuth } from 'middlewares'
 
 
 const storageConfig = multer.diskStorage({

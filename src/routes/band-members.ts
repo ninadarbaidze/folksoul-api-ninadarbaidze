@@ -1,7 +1,7 @@
 import express from 'express'
-import { getMembers, getMemberById, addNewMember, editMember, deleteMember} from 'controllers/band-members-controller'
-import  validateBandMember  from 'schemas/band-schema'
-import isAuth from 'middlewares/auth-middleware'
+import { getMembers, getMemberById, addNewMember, editMember, deleteMember} from 'controllers'
+import { validateBandMember }  from 'schemas'
+import { isAuth } from 'middlewares'
 
 
 const router = express.Router()
