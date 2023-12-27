@@ -75,7 +75,7 @@ npm run user:create
 6. Swagger documentation URL
 
 ```
-http://localhost:3000/api-docs/
+http://localhost:3007/api-docs/
 
 ```
 

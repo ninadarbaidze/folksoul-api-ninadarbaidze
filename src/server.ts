@@ -24,7 +24,7 @@ server.use(bandRoutes)
 server.use(socialRoutes)
 server.use(imageRoutes)
 
-server.listen(process.env.SERVER_PORT || 3000, () =>
+server.listen(process.env.SERVER_PORT || 3007, () =>
   console.log(`Server started at ${process.env.PROJECT_URL}`)
 )
 
