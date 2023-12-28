@@ -1,8 +1,8 @@
 import prompt from 'prompt' 
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
-import User from 'models/User'
-import { connectMongoose } from 'config'
+import User from '../models/User'
+import { connectMongoose } from '../config'
 
 const schema = {
   properties: {
